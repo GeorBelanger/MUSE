@@ -90,19 +90,20 @@ class Evaluator(object):
         """
         Evaluation on cross-lingual word similarity.
         """
-        src_emb = self.mapping(self.src_emb.weight).data.cpu().numpy()
-        tgt_emb = self.tgt_emb.weight.data.cpu().numpy()
-        # cross-lingual wordsim evaluation
-        src_tgt_ws_scores = get_crosslingual_wordsim_scores(
-            self.src_dico.lang, self.src_dico.word2id, src_emb,
-            self.tgt_dico.lang, self.tgt_dico.word2id, tgt_emb,
-        )
-        if src_tgt_ws_scores is None:
-            return
-        ws_crosslingual_scores = np.mean(list(src_tgt_ws_scores.values()))
-        logger.info("Cross-lingual word similarity score average: %.5f" % ws_crosslingual_scores)
-        to_log['ws_crosslingual_scores'] = ws_crosslingual_scores
-        to_log.update({'src_tgt_' + k: v for k, v in src_tgt_ws_scores.items()})
+        print("Can we evaluate the crosslingual word similarity later?")
+        # src_emb = self.mapping(self.src_emb.weight).data.cpu().numpy()
+        # tgt_emb = self.tgt_emb.weight.data.cpu().numpy()
+        # # cross-lingual wordsim evaluation
+        # src_tgt_ws_scores = get_crosslingual_wordsim_scores(
+        #     self.src_dico.lang, self.src_dico.word2id, src_emb,
+        #     self.tgt_dico.lang, self.tgt_dico.word2id, tgt_emb,
+        # )
+        # if src_tgt_ws_scores is None:
+        #     return
+        # ws_crosslingual_scores = np.mean(list(src_tgt_ws_scores.values()))
+        # logger.info("Cross-lingual word similarity score average: %.5f" % ws_crosslingual_scores)
+        # to_log['ws_crosslingual_scores'] = ws_crosslingual_scores
+        # to_log.update({'src_tgt_' + k: v for k, v in src_tgt_ws_scores.items()})
 
     def word_translation(self, to_log):
         """
@@ -111,15 +112,15 @@ class Evaluator(object):
         # mapped word embeddings
         src_emb = self.mapping(self.src_emb.weight).data
         tgt_emb = self.tgt_emb.weight.data
-
-        for method in ['nn', 'csls_knn_10']:
-            results = get_word_translation_accuracy(
-                self.src_dico.lang, self.src_dico.word2id, src_emb,
-                self.tgt_dico.lang, self.tgt_dico.word2id, tgt_emb,
-                method=method,
-                dico_eval=self.params.dico_eval
-            )
-            to_log.update([('%s-%s' % (k, method), v) for k, v in results])
+        print("Can we wait for the evaluation on word translation?")
+        # for method in ['nn', 'csls_knn_10']:
+        #     results = get_word_translation_accuracy(
+        #         self.src_dico.lang, self.src_dico.word2id, src_emb,
+        #         self.tgt_dico.lang, self.tgt_dico.word2id, tgt_emb,
+        #         method=method,
+        #         dico_eval=self.params.dico_eval
+        #     )
+        #     to_log.update([('%s-%s' % (k, method), v) for k, v in results])
 
     def sent_translation(self, to_log):
         """

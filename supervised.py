@@ -75,6 +75,8 @@ evaluator = Evaluator(trainer)
 
 # load a training dictionary. if a dictionary path is not provided, use a default
 # one ("default") or create one based on identical character strings ("identical_char")
+import ipdb
+ipdb.set_trace()
 trainer.load_training_dico(params.dico_train)
 
 # define the validation metric

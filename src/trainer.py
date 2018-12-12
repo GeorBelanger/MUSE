@@ -144,6 +144,7 @@ class Trainer(object):
         # use one of the provided dictionary
         elif dico_train == "default":
             filename = '%s-%s.0-5000.txt' % (self.params.src_lang, self.params.tgt_lang)
+            import ipdb; ipdb.set_trace()
             self.dico = load_dictionary(
                 os.path.join(DIC_EVAL_PATH, filename),
                 word2id1, word2id2
@@ -217,10 +218,13 @@ class Trainer(object):
         Save the best model for the given validation metric.
         """
         # best mapping for the given validation criterion
-        if to_log[metric] > self.best_valid_metric:
-            # new best mapping
-            self.best_valid_metric = to_log[metric]
-            logger.info('* Best value for "%s": %.5f' % (metric, to_log[metric]))
+        print("Need to add validation criterion here. For now alwasy True. Function save_best in trainer.py")
+        #if to_log[metric] > self.best_valid_metric:
+        if True:
+             # new best mapping
+            #self.best_valid_metric = to_log[metric]
+            self.best_valid_metric = 0
+            #logger.info('* Best value for "%s": %.5f' % (metric, to_log[metric]))
             # save the mapping
             W = self.mapping.weight.data.cpu().numpy()
             path = os.path.join(self.params.exp_path, 'best_mapping.pth')
